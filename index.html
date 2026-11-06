@@ -12,6 +12,7 @@ window.FIREBASE_CONFIG = {
   messagingSenderId: "121560385775",
   appId: "1:121560385775:web:c341a6909b89c7b8d2f31a"
 };
+window.DB_PREFIX = '';
 </script>
 <script>
 /* Strato di compatibilità: espone window.claude.use('db'|'downloads') sopra Firebase (Firestore + login Google).
@@ -69,7 +70,8 @@ window.FIREBASE_CONFIG = {
       add: async d => { const r = await ref.add(sanitize(d)); return wrapDoc(fs, r); }
     });
   }
-  const dbApi = fs => ({ doc: p => wrapDoc(fs, fs.doc(p)), collection: p => wrapCol(fs, fs.collection(p)) });
+  const PFX = () => String(window.DB_PREFIX || '');   // area test: prefisso sul nome della raccolta di primo livello (t_users, t_ledger, ...)
+  const dbApi = fs => ({ doc: p => wrapDoc(fs, fs.doc(PFX() + p)), collection: p => wrapCol(fs, fs.collection(PFX() + p)) });
 
   const downloadsApi = {
     save: async ({filename, data, type}) => {

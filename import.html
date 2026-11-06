@@ -5,6 +5,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script>
+window.DB_PREFIX = location.search.indexOf('env=test') >= 0 ? 't_' : '';
 window.FIREBASE_CONFIG = {
   apiKey: "AIzaSyALdOdmHX5_PDWI4NJ1c5jHho1PBx-pkXE",
   authDomain: "chiosco-ufficio.firebaseapp.com",
@@ -42,6 +43,7 @@ window.FIREBASE_CONFIG = {
   function wrapDoc(fs, ref) {
     return {
       id: ref.id, path: ref.path,
+      collection: p => wrapCol(fs, ref.collection(p)),
       get: () => ref.get(),
       set: d => ref.set(sanitize(d)),
       update: d => {
@@ -69,7 +71,8 @@ window.FIREBASE_CONFIG = {
       add: async d => { const r = await ref.add(sanitize(d)); return wrapDoc(fs, r); }
     });
   }
-  const dbApi = fs => ({ doc: p => wrapDoc(fs, fs.doc(p)), collection: p => wrapCol(fs, fs.collection(p)) });
+  const PFX = () => String(window.DB_PREFIX || '');   // area test: prefisso sul nome della raccolta di primo livello (t_users, t_ledger, ...)
+  const dbApi = fs => ({ doc: p => wrapDoc(fs, fs.doc(PFX() + p)), collection: p => wrapCol(fs, fs.collection(PFX() + p)) });
 
   const downloadsApi = {
     save: async ({filename, data, type}) => {
@@ -117,11 +120,12 @@ window.FIREBASE_CONFIG = {
 </script>
 <style>body{font:16px system-ui,sans-serif;background:#2b1b13;color:#f6ead3;max-width:560px;margin:0 auto;padding:24px}h1{font-size:1.4rem}button,input{font:inherit}button{padding:12px 20px;border:0;border-radius:10px;background:#e7c98f;color:#2b1b13;font-weight:700;cursor:pointer}button:disabled{opacity:.5;cursor:default}pre{background:#1b120d;padding:12px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:3em}.box{background:#3a2a20;padding:14px;border-radius:10px;margin:14px 0}</style>
 </head><body>
-<h1>Importa i dati del chiosco</h1>
+<h1>Importa i dati del chiosco <span id="env"></span></h1>
 <div class="box"><p>1. Scegli il file <b>chiosco-dati-….json</b> scaricato dal Backup dell\u2019admin del vecchio chiosco.</p><input type="file" id="f" accept=".json,application/json"></div>
 <div class="box"><p id="sum">Nessun file scelto.</p><label><input type="checkbox" id="ow"> Sovrascrivi i documenti già presenti</label><p><button id="go" disabled>Importa</button></p></div>
 <pre id="log"></pre>
 <script>
+document.getElementById('env').textContent = window.DB_PREFIX ? '(AREA TEST)' : '(UFFICIALE)';
 (async () => {
   const log = m => { const l = document.getElementById('log'); l.textContent += m + '\n'; };
   let data = null;
