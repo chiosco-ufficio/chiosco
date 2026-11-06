@@ -41,6 +41,7 @@ window.FIREBASE_CONFIG = {
   function wrapDoc(fs, ref) {
     return {
       id: ref.id, path: ref.path,
+      collection: p => wrapCol(fs, ref.collection(p)),
       get: () => ref.get(),
       set: d => ref.set(sanitize(d)),
       update: d => {
@@ -3781,6 +3782,7 @@ function buildSecPdf(JsPDF, d, T) {
       const cols = ['users', 'ledger', 'security', 'settings', 'fin', 'news', 'suggestions', 'backups'].concat(BACHECA ? ['bacheca'] : []);
       const out = {format: 'chiosco-export-1', exportedAt: Date.now(), data: {}};
       for (const c of cols) { const sn = await db.collection(c).get(); out.data[c] = {}; sn.docs.forEach(d => { out.data[c][d.id] = d.data(); }); }
+      for (const id of Object.keys(out.data.users || {})) { const sn = await db.doc('users/' + id).collection('tx').get(); if (sn.docs.length) { out.data['users/' + id + '/tx'] = {}; sn.docs.forEach(d => { out.data['users/' + id + '/tx'][d.id] = d.data(); }); } }
       const d = new Date(), stamp = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
       await downloadsCap.save({filename: 'chiosco-dati-' + stamp + '.json', data: JSON.stringify(out)});
       toast(t('expSaved'));
