@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Importa dati del chiosco</title>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+window.FIREBASE_CONFIG = {
+  apiKey: "AIzaSyALdOdmHX5_PDWI4NJ1c5jHho1PBx-pkXE",
+  authDomain: "chiosco-ufficio.firebaseapp.com",
+  projectId: "chiosco-ufficio",
+  storageBucket: "chiosco-ufficio.firebasestorage.app",
+  messagingSenderId: "121560385775",
+  appId: "1:121560385775:web:c341a6909b89c7b8d2f31a"
+};
+</script>
+<script>
+/* Strato di compatibilità: espone window.claude.use('db'|'downloads') sopra Firebase (Firestore + login Google).
+   Richiede firebase-config.js (window.FIREBASE_CONFIG) e gli SDK "compat" di Firebase già caricati. */
+(function () {
+  'use strict';
+  const ALLOWED_HINT = 'Accedi con l’account del chiosco';
+  let appReady = null;
+
+  // --- utilità: Firestore non accetta undefined e, in update(), un oggetto annidato SOSTITUISCE la mappa.
+  const clean = v => v === undefined ? null : v;
+  function sanitize(o) {
+    if (Array.isArray(o)) return o.map(sanitize);
+    if (o && typeof o === 'object' && !(o instanceof Date)) { const r = {}; for (const k of Object.keys(o)) if (o[k] !== undefined) r[k] = sanitize(o[k]); return r; }
+    return clean(o);
+  }
+  // {a:1, b:{c:2}} -> [['a'],1, ['b','c'],2]: così update() fonde le mappe come faceva claude.db
+  function flatten(obj, pre, out) {
+    for (const k of Object.keys(obj)) {
+      const v = obj[k]; if (v === undefined) continue;
+      const path = pre.concat(k);
+      if (v && typeof v === 'object' && !Array.isArray(v) && !(v instanceof Date) && Object.keys(v).length) flatten(v, path, out);
+      else out.push([path, sanitize(v)]);
+    }
+    return out;
+  }
+  function wrapDoc(fs, ref) {
+    return {
+      id: ref.id, path: ref.path,
+      get: () => ref.get(),
+      set: d => ref.set(sanitize(d)),
+      update: d => {
+        const pairs = flatten(d || {}, [], []);
+        if (!pairs.length) return Promise.resolve();
+        const args = []; pairs.forEach(([p, v]) => { args.push(new firebase.firestore.FieldPath(...p), v); });
+        return ref.update(...args);
+      },
+      delete: () => ref.delete(),
+      onSnapshot: (a, b) => ref.onSnapshot(a, b)
+    };
+  }
+  function wrapQuery(q) {
+    return {
+      orderBy: (f, d) => wrapQuery(q.orderBy(f, d)),
+      limit: n => wrapQuery(q.limit(n)),
+      get: () => q.get(),
+      onSnapshot: (a, b) => q.onSnapshot(a, b)
+    };
+  }
+  function wrapCol(fs, ref) {
+    return Object.assign(wrapQuery(ref), {
+      path: ref.path,
+      doc: id => wrapDoc(fs, id ? ref.doc(id) : ref.doc()),
+      add: async d => { const r = await ref.add(sanitize(d)); return wrapDoc(fs, r); }
+    });
+  }
+  const dbApi = fs => ({ doc: p => wrapDoc(fs, fs.doc(p)), collection: p => wrapCol(fs, fs.collection(p)) });
+
+  const downloadsApi = {
+    save: async ({filename, data, type}) => {
+      const blob = data instanceof Blob ? data : new Blob([data], {type: type || 'application/octet-stream'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename || 'download';
+      document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    }
+  };
+
+  function loginOverlay(auth) {
+    return new Promise(resolve => {
+      const ov = document.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#1b120d;color:#f3e6cf;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font:16px system-ui,sans-serif;text-align:center;padding:24px';
+      ov.innerHTML = '<div style="font-size:1.6rem;font-weight:800;letter-spacing:.04em">CHIOSCO D’UFFICIO</div><div style="opacity:.8;max-width:340px">' + ALLOWED_HINT + '</div><button id="cs-login" style="font:inherit;font-weight:700;padding:12px 22px;border:0;border-radius:10px;background:#e7c98f;color:#2b1b13;cursor:pointer">Accedi con Google</button><div id="cs-err" style="color:#ff9b8f;min-height:1.3em;max-width:340px"></div>';
+      document.body.appendChild(ov);
+      ov.querySelector('#cs-login').onclick = async () => {
+        try { await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()); } catch (e) { ov.querySelector('#cs-err').textContent = 'Accesso non riuscito: ' + (e && e.code || e); }
+      };
+      auth.onAuthStateChanged(u => { if (u) { ov.remove(); resolve(u); } });
+    });
+  }
+
+  function init() {
+    if (appReady) return appReady;
+    appReady = (async () => {
+      if (!window.firebase || !window.FIREBASE_CONFIG) return null;
+      const app = firebase.initializeApp(window.FIREBASE_CONFIG);
+      const auth = firebase.auth(); const fs = firebase.firestore();
+      try { await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL); } catch (_) {}
+      await new Promise(r => { const un = auth.onAuthStateChanged(u => { un(); r(u); }); });
+      if (!auth.currentUser) await loginOverlay(auth);
+      return {db: dbApi(fs), auth};
+    })();
+    return appReady;
+  }
+  window.claude = {
+    use: async name => {
+      if (name === 'downloads') return downloadsApi;
+      if (name === 'db') { const r = await init(); return r ? r.db : null; }
+      return null;
+    }
+  };
+  window.claudeShim = {sanitize, flatten};
+})();
+</script>
+<style>body{font:16px system-ui,sans-serif;background:#2b1b13;color:#f6ead3;max-width:560px;margin:0 auto;padding:24px}h1{font-size:1.4rem}button,input{font:inherit}button{padding:12px 20px;border:0;border-radius:10px;background:#e7c98f;color:#2b1b13;font-weight:700;cursor:pointer}button:disabled{opacity:.5;cursor:default}pre{background:#1b120d;padding:12px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:3em}.box{background:#3a2a20;padding:14px;border-radius:10px;margin:14px 0}</style>
+</head><body>
+<h1>Importa i dati del chiosco</h1>
+<div class="box"><p>1. Scegli il file <b>chiosco-dati-….json</b> scaricato dal Backup dell\u2019admin del vecchio chiosco.</p><input type="file" id="f" accept=".json,application/json"></div>
+<div class="box"><p id="sum">Nessun file scelto.</p><label><input type="checkbox" id="ow"> Sovrascrivi i documenti già presenti</label><p><button id="go" disabled>Importa</button></p></div>
+<pre id="log"></pre>
+<script>
+(async () => {
+  const log = m => { const l = document.getElementById('log'); l.textContent += m + '\n'; };
+  let data = null;
+  document.getElementById('f').onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    try { const j = JSON.parse(await f.text()); if (j.format !== 'chiosco-export-1') throw new Error('formato non riconosciuto'); data = j.data; }
+    catch (x) { document.getElementById('sum').textContent = 'File non valido: ' + x.message; return; }
+    const parts = Object.keys(data).map(c => c + ': ' + Object.keys(data[c]).length);
+    document.getElementById('sum').textContent = 'Nel file: ' + parts.join(' · ');
+    document.getElementById('go').disabled = false;
+  };
+  document.getElementById('go').onclick = async () => {
+    const db = await window.claude.use('db'); if (!db) { log('Database non disponibile (login?)'); return; }
+    const ow = document.getElementById('ow').checked; document.getElementById('go').disabled = true;
+    let ok = 0, skip = 0, fail = 0;
+    for (const c of Object.keys(data)) {
+      let n = 0;
+      for (const id of Object.keys(data[c])) {
+        try {
+          const ref = db.doc(c + '/' + id);
+          if (!ow) { const sn = await ref.get(); if (sn.exists) { skip++; continue; } }
+          await ref.set(data[c][id]); ok++; n++;
+        } catch (e) { fail++; log('ERRORE ' + c + '/' + id + ': ' + (e && e.message || e)); }
+      }
+      log(c + ': importati ' + n + ' di ' + Object.keys(data[c]).length);
+    }
+    log('\nFINE. Importati ' + ok + ', saltati ' + skip + ', errori ' + fail + '.');
+    document.getElementById('go').disabled = false;
+  };
+  await window.claude.use('db');
+})();
+</script></body></html>

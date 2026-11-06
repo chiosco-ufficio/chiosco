@@ -2956,7 +2956,7 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
       sheet.innerHTML = head + '<div class="adm-grid">' +
         (BAK_HIST
           ? '<div class="adm-card"><h3 style="flex-wrap:wrap;row-gap:4px"><span style="display:inline-flex;align-items:center">' + ICON.backup + esc(t('admBackup')) + '</span><span id="bak-badge" class="badge warn" hidden></span></h3><p>' + esc(bt('cardText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="bak">' + esc(t('admOpen')) + '</button></div></div>'
-          : '<div class="adm-card"><h3>' + ICON.backup + esc(t('admBackup')) + '</h3><p>' + esc(t('admBackupText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="xlsx">' + esc(t('admExcel')) + '</button><button class="btn" type="button" data-adm="pdf">' + esc(t('admPdf')) + '</button></div></div>') +
+          : '<div class="adm-card"><h3>' + ICON.backup + esc(t('admBackup')) + '</h3><p>' + esc(t('admBackupText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="xlsx">' + esc(t('admExcel')) + '</button><button class="btn" type="button" data-adm="pdf">' + esc(t('admPdf')) + '</button><button class="btn ghost" type="button" data-adm="json">Dati (JSON)</button></div></div>') +
         '<div class="adm-card"><h3>' + ICON.trophy + esc(t('admRank')) + '</h3><p>' + esc(t('admRankText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="rank">' + esc(t('admOpen')) + '</button></div></div>' +
         '<div class="adm-card"><h3 style="flex-wrap:wrap;row-gap:4px"><span style="display:inline-flex;align-items:center">' + ICON.shield + esc(t('admSec')) + '</span><span id="sec-badge" class="badge warn" hidden></span></h3><p>' + esc(t('admSecText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="sec">' + esc(t('admOpen')) + '</button></div></div>' +
         '<div class="adm-card"><h3>' + ICON.counter + esc(t('admCnt')) + '</h3><p>' + esc(t('admCntText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="cnt">' + esc(t('admOpen')) + '</button></div></div>' +
@@ -3390,6 +3390,7 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
     }
     switch (b.dataset.adm) {
       case 'xlsx': case 'pdf': exportReport(b.dataset.adm); break;
+      case 'json': exportJSON(); break;
       case 'cntxlsx': case 'cntpdf': exportCnt(b.dataset.adm === 'cntxlsx' ? 'xlsx' : 'pdf'); break;
       case 'cnt': adm.view = 'cnt'; paintAdmin(sheet); break;
       case 'sec': adm.view = 'sec'; paintAdmin(sheet); break;
@@ -3771,6 +3772,20 @@ function buildSecPdf(JsPDF, d, T) {
 }
 
   let downloadsCap = null;
+  // Copia completa dei dati (tutte le collezioni) per spostare il chiosco su un altro database.
+  async function exportJSON() {
+    try {
+      toast(t('expLoading'));
+      if (!downloadsCap) downloadsCap = window.claude && window.claude.use ? await window.claude.use('downloads') : null;
+      if (!downloadsCap) { toast(t('expUnavail')); return; }
+      const cols = ['users', 'ledger', 'security', 'settings', 'fin', 'news', 'suggestions', 'backups'].concat(BACHECA ? ['bacheca'] : []);
+      const out = {format: 'chiosco-export-1', exportedAt: Date.now(), data: {}};
+      for (const c of cols) { const sn = await db.collection(c).get(); out.data[c] = {}; sn.docs.forEach(d => { out.data[c][d.id] = d.data(); }); }
+      const d = new Date(), stamp = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      await downloadsCap.save({filename: 'chiosco-dati-' + stamp + '.json', data: JSON.stringify(out)});
+      toast(t('expSaved'));
+    } catch (e) { toast(t('expFail')); }
+  }
   async function finReport(rep) {
     let rows = fin.rows;
     try { const sn = await db.collection('fin').orderBy('ts', 'desc').limit(1000).get(); rows = sn.docs.map(d => Object.assign({id: d.id}, d.data())); } catch (_) {}
@@ -5964,7 +5979,7 @@ function buildSecPdf(JsPDF, d, T) {
     else rem = '<div class="bak-rem" role="status"><span>' + esc(bt('first', {n: bakDay(st.next)})) + '</span></div>';
     const rows = bakList.map(x => '<tr><td>' + esc(fmtDate(x.ts) + ' ' + fmtTime(x.ts)) + '</td><td>' + esc(String(x.kind || '').toUpperCase()) + '</td><td class="num">' + esc(String(x.users || 0)) + '</td><td class="num">' + esc(eur(x.netCents || 0)) + '</td></tr>').join('');
     sheet.innerHTML = head + rem +
-      '<p style="margin:0">' + esc(t('admBackupText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="xlsx">' + esc(t('admExcel')) + '</button><button class="btn" type="button" data-adm="pdf">' + esc(t('admPdf')) + '</button></div>' +
+      '<p style="margin:0">' + esc(t('admBackupText')) + '</p><div class="adm-row"><button class="btn primary" type="button" data-adm="xlsx">' + esc(t('admExcel')) + '</button><button class="btn" type="button" data-adm="pdf">' + esc(t('admPdf')) + '</button><button class="btn ghost" type="button" data-adm="json">Dati (JSON)</button></div>' +
       '<h3 class="ns-lt">' + esc(bt('histT')) + '</h3>' +
       (rows ? '<div class="bak-tw"><table class="bak-t"><thead><tr><th>' + esc(bt('colWhen')) + '</th><th>' + esc(bt('colFmt')) + '</th><th class="num">' + esc(bt('colUsers')) + '</th><th class="num">' + esc(bt('colNet')) + '</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '<p class="ns-empty">' + esc(bt('none')) + '</p>') +
       '<div class="m-actions"><button class="btn ghost" type="button" data-adm="home">' + ICON.back + esc(t('back')) + '</button><button class="btn" type="button" data-close>' + esc(t('close')) + '</button></div>';
