@@ -838,6 +838,23 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
 .bk-lb-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .bk-lb-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#0b3d2e}
 .bk-lb-like{font-size:1.15rem;padding:8px 16px}
+.bk-lb-fig{overflow-y:auto}
+.bk-cm{border-top:2px dashed #a7e3c9;padding-top:8px;display:flex;flex-direction:column;gap:8px;cursor:default;text-align:left}
+.bk-cm-h{margin:0;font-size:1rem;color:#0b3d2e}
+.bk-cm-list{max-height:min(26vh,220px);overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px}
+.bk-cmi{background:#e3f8ee;border-radius:10px;padding:6px 10px}
+.bk-cmi p{margin:2px 0 0;color:#0b3d2e;overflow-wrap:anywhere;white-space:pre-wrap}
+.bk-cmh{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bk-cmx{margin-left:auto;padding:2px 8px;font-size:.8rem}
+.bk-cm-form{display:flex;flex-direction:column;gap:6px}
+.bk-cm-form textarea{width:100%;box-sizing:border-box;resize:vertical;min-height:52px;font:inherit;padding:8px 10px;border:1px solid #a7e3c9;border-radius:8px;color:#0b3d2e;background:#fff}
+.bk-cm-form .bk-q{width:100%;box-sizing:border-box}
+.bk-cm-form .bk-res{max-height:130px;overflow-y:auto}
+.bk-cm-bar{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.bk-cm-bar .err{margin:0;flex:1}
+.bk-lb .bk-lab,.bk-lb .bk-none{color:#0b3d2e}
+.bk-cmb{margin-left:6px}
+.bk-lb-img{width:min(calc(92vw - 40px),1000px,calc((94vh - 480px)*1.3333),calc(100vw - 150px))!important;min-width:240px}
 .bk-lb-x{position:absolute;top:14px;right:16px;width:46px;height:46px;border-radius:50%;border:1px solid #6ee7b7;background:rgba(6,78,59,.85);color:#d1fae5;font-size:1.3rem;cursor:pointer;z-index:2}
 .bk-lb-x:hover{background:#10b981;color:#022c22}
 .bk-lb-nav{flex:none;width:52px;height:52px;border-radius:50%;border:1px solid #6ee7b7;background:rgba(6,78,59,.85);color:#d1fae5;font-size:2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 4px}
@@ -4344,6 +4361,8 @@ function buildSecPdf(JsPDF, d, T) {
     it: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Gli scatti di pausa del chiosco: fai una foto dal PC, scrivi due righe e finisce qui, visibile a tutti i colleghi. Metti un ❤️ ai post che ti piacciono!', snap: 'Scatta una foto', shoot: 'Scatta', retake: 'Rifai la foto', cancel: 'Annulla', who: 'Chi sei?', whoPh: 'Scegli il tuo nome', search: 'Cerca il tuo nome…', noUser: 'Nessun utente trovato', chg: 'Cambia', cap: 'Didascalia', capPh: 'Scrivi qualcosa… (puoi usare le emoji)', emo: 'Emoji', post: 'Pubblica', empty: 'ChioscoGram è ancora vuoto: sii il primo a scattare una foto!', you: 'Tu', like: 'Mi piace', camErr: 'Ho aperto la finestra della fotocamera: scatta lì (autoscatto fino a 10 secondi) e la foto torna qui da sola. Non la vedi? Riaprila oppure scegli una foto dal PC.', popBtn: 'Riapri la finestra della fotocamera', close: 'Chiudi', diag: 'Diagnostica fotocamera', timerL: 'Autoscatto', noTimer: 'Subito', linkBtn: 'Apri la fotocamera (nuova scheda)', diagRun: 'Sto controllando…', diagCopy: 'Copia il risultato', copied: 'Copiato', camT: 'Fotocamera', timer: 'Autoscatto', now: 'Subito', popErr: 'Questa pagina non può aprire finestre né la fotocamera: usa “Scegli una foto” (puoi scattarla con l’app Fotocamera del PC).', popWait: 'Finestra fotocamera aperta: scatta lì…', pick: 'Scegli una foto', needImg: 'Prima scatta o scegli una foto.', needWho: 'Scegli il tuo nome.', wait: 'Aspetta qualche secondo prima di pubblicare di nuovo.', ok: 'Pubblicato su ChioscoGram!', err: 'Qualcosa è andato storto, riprova.', admBtn: 'Modera (admin)', admMode: 'Modalità admin: puoi modificare le didascalie ed eliminare i post.', exit: 'Esci dalla modalità admin', edit: 'Modifica', save: 'Salva', del: 'Elimina', sure: 'Confermi?', saved: 'Salvato', close: 'Chiudi', anon: 'Qualcuno', live: 'Scatto in corso'},
     en: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Snapshots from the coffee break: take a photo from the PC, write a line and it lands here for all colleagues to see. Drop a ❤️ on the posts you like!', snap: 'Take a photo', shoot: 'Snap', retake: 'Retake', cancel: 'Cancel', who: 'Who are you?', whoPh: 'Pick your name', search: 'Search your name…', noUser: 'No user found', chg: 'Change', cap: 'Caption', capPh: 'Write something… (emoji welcome)', emo: 'Emoji', post: 'Post', empty: 'ChioscoGram is still empty: be the first to post a photo!', you: 'You', like: 'Like', camErr: 'I opened the camera window: snap there (self-timer up to 10 seconds) and the photo comes back here by itself. Can’t see it? Reopen it or choose a photo from the PC.', popBtn: 'Reopen the camera window', close: 'Close', diag: 'Camera diagnostics', timerL: 'Self-timer', noTimer: 'Now', linkBtn: 'Open camera (new tab)', diagRun: 'Checking…', diagCopy: 'Copy result', copied: 'Copied', camT: 'Camera', timer: 'Self-timer', now: 'Now', popErr: 'This page can’t open windows or the camera: use “Choose a photo” (you can take it with the PC’s Camera app).', popWait: 'Camera window open: snap there…', pick: 'Choose a photo', needImg: 'Take or choose a photo first.', needWho: 'Pick your name.', wait: 'Wait a few seconds before posting again.', ok: 'Posted on ChioscoGram!', err: 'Something went wrong, try again.', admBtn: 'Moderate (admin)', admMode: 'Admin mode: you can edit captions and delete posts.', exit: 'Exit admin mode', edit: 'Edit', save: 'Save', del: 'Delete', sure: 'Sure?', saved: 'Saved', close: 'Close', anon: 'Someone', live: 'Taking photo'}
   };
+  Object.assign(BKT.it, {cm: 'Commenti', cmPh: 'Scrivi un commento…', cmSend: 'Invia', cmNone: 'Ancora nessun commento: scrivi il primo!', cmAs: 'Commenti come', needTxt: 'Scrivi qualcosa prima di inviare.', cmDel: 'Elimina commento', cmCnt: 'Commenti', tkNew: 'Nuovo post di {n} su ChioscoGram: vai a vederlo!'});
+  Object.assign(BKT.en, {cm: 'Comments', cmPh: 'Write a comment…', cmSend: 'Send', cmNone: 'No comments yet: write the first one!', cmAs: 'Commenting as', needTxt: 'Write something first.', cmDel: 'Delete comment', cmCnt: 'Comments', tkNew: 'New post by {n} on ChioscoGram: go and see it!'});
   const bkt = k => (BKT[lang] && BKT[lang][k]) || BKT.it[k] || k;
   const BK_EMO = ['☕', '🥐', '😀', '😂', '😍', '😎', '🔥', '👏', '🎉', '❤️', '👍', '🍪', '🍕', '😴', '🤪'];
   let bkList = [];
@@ -4385,6 +4404,7 @@ function buildSecPdf(JsPDF, d, T) {
         bkList = sn.docs.map(d => Object.assign({id: d.id}, d.data()));
         if (modal && modal.bkPaint) modal.bkPaint();
         bkLBPaint(false);
+        if (typeof tickerUpdate === 'function') tickerUpdate();
         cgRefresh(); if (modal && modal.bkOpen) cgMarkSeen();
       }, () => {});
     } catch (_) {}
@@ -4402,15 +4422,25 @@ function buildSecPdf(JsPDF, d, T) {
     el = document.createElement('div'); el.id = 'bk-lb'; el.className = 'bk-lb'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true');
     el.innerHTML = '<button type="button" class="bk-lb-x" data-lbx aria-label="' + esc(bkt('close')) + '">✕</button>' +
       '<button type="button" class="bk-lb-nav prev" data-lbp aria-label="‹">‹</button>' +
-      '<figure class="bk-lb-fig"><img class="bk-lb-img" alt=""><figcaption><p class="bk-lb-cap"></p><div class="bk-lb-row"><div class="bk-lb-meta"></div><button type="button" class="cg-like bk-lb-like" data-lblike aria-label="' + esc(bkt('like')) + '"><i></i> <b></b></button></div></figcaption></figure>' +
+      '<figure class="bk-lb-fig"><img class="bk-lb-img" alt=""><figcaption><p class="bk-lb-cap"></p><div class="bk-lb-row"><div class="bk-lb-meta"></div><button type="button" class="cg-like bk-lb-like" data-lblike aria-label="' + esc(bkt('like')) + '"><i></i> <b></b></button></div></figcaption>' +
+      '<section class="bk-cm" aria-label="' + esc(bkt('cm')) + '"><h4 class="bk-cm-h"></h4><div class="bk-cm-list" aria-live="polite"></div><form class="bk-cm-form" novalidate></form></section></figure>' +
       '<button type="button" class="bk-lb-nav next" data-lbn aria-label="›">›</button>';
     el.addEventListener('click', ev => {
       const t = ev.target;
       if (t.closest('[data-lbx]') || t === el) { bkLBClose(); return; }
       if (t.closest('[data-lbp]')) { bkLBStep(-1); return; }
       if (t.closest('[data-lbn]')) { bkLBStep(1); return; }
-      if (t.closest('[data-lblike]')) { bkLikeDo(bkLBId); }
+      if (t.closest('[data-lblike]')) { bkLikeDo(bkLBId); return; }
+      const pk = t.closest('[data-cmpick]'); if (pk) { bkCm.who = pk.dataset.cmpick; bkCmForm(true); return; }
+      if (t.closest('[data-cmchg]')) { bkCm.who = ''; bkCmForm(false); const q = el.querySelector('.bk-cm-q'); if (q) q.focus(); return; }
+      const dl = t.closest('[data-cmdel]'); if (dl) { bkCmDel(dl.dataset.cmdel); }
     });
+    el.addEventListener('input', ev => {
+      const t = ev.target;
+      if (t.classList.contains('bk-cm-q')) { const r = el.querySelector('.bk-cm-res'); if (r) r.innerHTML = bkCmRes(t.value); }
+      else if (t.classList.contains('bk-cm-t')) { bkCm.txt = t.value; const c = el.querySelector('.bk-cm-cnt'); if (c) c.textContent = String(200 - t.value.length); }
+    });
+    el.addEventListener('submit', ev => { ev.preventDefault(); bkCmSend(); });
     document.body.appendChild(el); return el;
   }
   function bkLBPaint(pop) {
@@ -4424,13 +4454,85 @@ function buildSecPdf(JsPDF, d, T) {
     lk.querySelector('i').textContent = p.lk ? '❤️' : '🤍'; lk.querySelector('b').textContent = p.lk || 0;
     if (pop) { lk.classList.remove('pop'); void lk.offsetWidth; lk.classList.add('pop'); }
     el.querySelector('.prev').hidden = el.querySelector('.next').hidden = bkList.length < 2;
+    if (bkCm.for !== bkLBId) { bkCmSub(bkLBId); bkCmForm(false); } else bkCmList();
   }
   function bkLBOpen(id) { bkLBId = id; const el = bkLBEl(); el.hidden = false; bkLBPaint(false); const x = el.querySelector('[data-lbx]'); if (x) x.focus(); }
-  function bkLBClose() { const el = document.getElementById('bk-lb'); if (el) el.hidden = true; bkLBId = null; }
-  function bkLBStep(d) { const i = bkList.findIndex(v => v.id === bkLBId); if (i < 0 || !bkList.length) return; bkLBId = bkList[(i + d + bkList.length) % bkList.length].id; bkLBPaint(false); }
+  function bkLBClose() { const el = document.getElementById('bk-lb'); if (el) el.hidden = true; bkLBId = null; bkCmSub(null); }
+  function bkLBStep(d) { const i = bkList.findIndex(v => v.id === bkLBId); if (i < 0 || !bkList.length) return; bkLBId = bkList[(i + d + bkList.length) % bkList.length].id; bkCm.txt = ''; bkLBPaint(false); }
+  // ---- commenti: sottocollezione bacheca/<post>/cm, contatore nc sul post ----
+  const bkCm = {for: null, list: [], who: '', txt: '', unsub: null, sure: null, last: 0};
+  function bkCmSub(id) {
+    if (bkCm.unsub) { try { bkCm.unsub(); } catch (_) {} bkCm.unsub = null; }
+    bkCm.for = id; bkCm.list = []; bkCm.sure = null;
+    if (!id) return;
+    try {
+      bkCm.unsub = db.collection('bacheca/' + id + '/cm').orderBy('ts', 'asc').limit(200).onSnapshot(sn => {
+        if (bkCm.for !== id) return;
+        bkCm.list = sn.docs.map(d => Object.assign({id: d.id}, d.data()));
+        bkCmList();
+        const pp = bkList.find(v => v.id === id);
+        if (pp && (pp.nc || 0) !== bkCm.list.length) { pp.nc = bkCm.list.length; if (modal && modal.bkPaint) modal.bkPaint(); }
+      }, () => {});
+    } catch (_) {}
+  }
+  function bkCmList() {
+    const el = document.getElementById('bk-lb'); if (!el || el.hidden) return;
+    const n = bkCm.list.length;
+    el.querySelector('.bk-cm-h').textContent = bkt('cmCnt') + ' (' + n + ')';
+    const L = el.querySelector('.bk-cm-list'), top = L.scrollTop, atEnd = top + L.clientHeight >= L.scrollHeight - 30;
+    L.innerHTML = n ? bkCm.list.map(c => {
+      const u = c.uid && users.get(c.uid);
+      return '<div class="bk-cmi"><div class="bk-cmh"><span class="bk-who">' + (u ? faceHTML(u) : '') + '<b>' + esc(c.name || bkt('anon')) + '</b></span><span class="bk-dt">' + esc(bkDate(c.ts)) + '</span>' +
+        (bk.admin ? '<button type="button" class="btn ' + (bkCm.sure === c.id ? 'danger' : 'ghost') + ' bk-cmx" data-cmdel="' + esc(c.id) + '" aria-label="' + esc(bkt('cmDel')) + '">' + ICON.trash + (bkCm.sure === c.id ? esc(bkt('sure')) : '') + '</button>' : '') + '</div><p>' + esc(c.txt || '') + '</p></div>';
+    }).join('') : '<p class="bk-none">' + esc(bkt('cmNone')) + '</p>';
+    if (atEnd) L.scrollTop = L.scrollHeight; else L.scrollTop = top;
+  }
+  function bkCmRes(q) {
+    const n = x => String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(), k = n(q).trim();
+    const arr = [...users.values()].filter(u => u.name && (!k || n(u.name).includes(k))).sort((a, b) => a.name.localeCompare(b.name, 'it'));
+    if (!arr.length) return '<p class="bk-none">' + esc(bkt('noUser')) + '</p>';
+    return arr.map(u => '<button type="button" class="bk-opt" data-cmpick="' + esc(u.id) + '">' + faceHTML(u) + '<span>' + esc(u.name) + '</span></button>').join('');
+  }
+  function bkCmForm(focus) {
+    const el = document.getElementById('bk-lb'); if (!el) return;
+    const f = el.querySelector('.bk-cm-form'), u = bkCm.who && users.get(bkCm.who);
+    if (!u) bkCm.who = '';
+    f.innerHTML = u
+      ? '<div class="bk-pick"><span class="bk-lab">' + esc(bkt('cmAs')) + '</span><span class="bk-chip">' + faceHTML(u) + '<b>' + esc(u.name) + '</b></span><button type="button" class="btn ghost" data-cmchg>' + esc(bkt('chg')) + '</button></div>' +
+        '<textarea class="bk-cm-t" maxlength="200" rows="2" placeholder="' + esc(bkt('cmPh')) + '">' + esc(bkCm.txt) + '</textarea><div class="bk-cm-bar"><span class="ns-cnt bk-cm-cnt">' + (200 - bkCm.txt.length) + '</span><p class="err bk-cm-err" role="alert" hidden></p><button class="btn primary" type="submit">' + esc(bkt('cmSend')) + '</button></div>'
+      : '<label class="bk-lab">' + esc(bkt('who')) + '</label><input type="text" class="bk-q bk-cm-q" autocomplete="off" placeholder="' + esc(bkt('search')) + '"><div class="bk-res bk-cm-res">' + bkCmRes('') + '</div>';
+    if (focus) { const t = f.querySelector('.bk-cm-t'); if (t) t.focus(); }
+  }
+  async function bkCmSend() {
+    const el = document.getElementById('bk-lb'), id = bkLBId; if (!el || !id) return;
+    const er = el.querySelector('.bk-cm-err'), say = m => { if (er) { er.textContent = m; er.hidden = !m; } };
+    const txt = (bkCm.txt || '').trim().slice(0, 200), u = users.get(bkCm.who);
+    if (!u) { say(bkt('needWho')); return; }
+    if (!txt) { say(bkt('needTxt')); return; }
+    if (Date.now() - bkCm.last < 4000) { say(bkt('wait')); return; }
+    bkCm.last = Date.now();
+    try {
+      await db.collection('bacheca/' + id + '/cm').add({uid: bkCm.who, name: u.name, txt, ts: Date.now()});
+      bkCm.txt = ''; bkCmForm(false);
+      const pp = bkList.find(v => v.id === id), n = Math.max((bkCm.list.length || 0), (pp && pp.nc) || 0) + 1;
+      try { await db.doc('bacheca/' + id).update({nc: n}); } catch (_) {}
+    } catch (_) { say(bkt('err')); }
+  }
+  async function bkCmDel(cid) {
+    const id = bkLBId; if (!id || !bk.admin) return;
+    if (bkCm.sure !== cid) { bkCm.sure = cid; bkCmList(); return; }
+    bkCm.sure = null;
+    try {
+      await db.doc('bacheca/' + id + '/cm/' + cid).delete();
+      const n = Math.max(0, bkCm.list.filter(c => c.id !== cid).length);
+      try { await db.doc('bacheca/' + id).update({nc: n}); } catch (_) {}
+    } catch (_) { toast(bkt('err')); }
+  }
   document.addEventListener('keydown', ev => {
     const el = document.getElementById('bk-lb'); if (!el || el.hidden) return;
+    const typing = ev.target && /^(INPUT|TEXTAREA)$/.test(ev.target.tagName);
     if (ev.key === 'Escape') { ev.stopPropagation(); ev.preventDefault(); bkLBClose(); }
+    else if (typing) return;
     else if (ev.key === 'ArrowLeft') { ev.preventDefault(); bkLBStep(-1); }
     else if (ev.key === 'ArrowRight') { ev.preventDefault(); bkLBStep(1); }
   }, true);
@@ -4451,7 +4553,7 @@ function buildSecPdf(JsPDF, d, T) {
       let h = '<article class="bk-card" style="--r:' + ((i % 3) - 1) * 1.3 + 'deg"><span class="bk-tape" aria-hidden="true"></span><img class="bk-img" src="' + esc(p.img || '') + '" alt="" loading="lazy" data-bkzoom="' + esc(p.id) + '">';
       h += ed ? '<textarea class="bk-edit" data-bkedit="' + esc(p.id) + '" maxlength="140" aria-label="' + esc(bkt('cap')) + '">' + esc(p.cap || '') + '</textarea>' : (p.cap ? '<p class="bk-cap" data-bkzoom="' + esc(p.id) + '">' + esc(p.cap) + '</p>' : '');
       h += '<div class="bk-meta">' + bkAuthor(p) + '<span class="bk-dt">' + esc(bkDate(p.ts)) + '</span></div>';
-      h += '<button type="button" class="cg-like' + (p.lk ? ' on' : '') + '" data-bklike="' + esc(p.id) + '" aria-label="' + esc(bkt('like')) + '"><i>' + (p.lk ? '❤️' : '🤍') + '</i> <b>' + (p.lk || 0) + '</b></button>';
+      h += '<button type="button" class="cg-like' + (p.lk ? ' on' : '') + '" data-bklike="' + esc(p.id) + '" aria-label="' + esc(bkt('like')) + '"><i>' + (p.lk ? '❤️' : '🤍') + '</i> <b>' + (p.lk || 0) + '</b></button><button type="button" class="cg-like bk-cmb" data-bkzoom="' + esc(p.id) + '" aria-label="' + esc(bkt('cm')) + '"><i>💬</i> <b>' + (p.nc || 0) + '</b></button>';
       if (bk.admin) h += '<div class="ns-acts">' + (ed ? '<button class="btn primary" type="button" data-bksave="' + esc(p.id) + '">' + esc(bkt('save')) + '</button><button class="btn ghost" type="button" data-bkcancel>' + esc(bkt('cancel')) + '</button>' : '<button class="btn ghost" type="button" data-bkedt="' + esc(p.id) + '">' + esc(bkt('edit')) + '</button>') +
         '<button class="btn ' + (bk.sure === p.id ? 'danger' : 'ghost') + '" type="button" data-bkdel="' + esc(p.id) + '">' + ICON.trash + esc(bk.sure === p.id ? bkt('sure') : bkt('del')) + '</button></div>';
       return h + '</article>';
@@ -4540,7 +4642,7 @@ function buildSecPdf(JsPDF, d, T) {
     const sheet = openModal(bkHTML(), {doc: true, onClose: () => { bkStop(); bkLBClose(); }});
     sheet.classList.add('cg');
     modal.sheet = sheet;
-    sheet.addEventListener('click', ev => { const z = ev.target.closest('[data-bkzoom]'); if (z && !ev.target.closest('button,textarea')) bkLBOpen(z.dataset.bkzoom); });
+    sheet.addEventListener('click', ev => { const z = ev.target.closest('[data-bkzoom]'); if (z && !ev.target.closest('textarea,button:not([data-bkzoom])')) bkLBOpen(z.dataset.bkzoom); });
     const draw = () => { sheet.innerHTML = bkHTML(); if (bk.step === 'cam') bkAttachCam(sheet); };
     bk.draw = draw;
     modal.rerender = () => { setTimeout(() => { if (bk.step === 'cam') bkAttachCam(sheet); }, 0); return bkHTML(); };
@@ -4595,7 +4697,7 @@ function buildSecPdf(JsPDF, d, T) {
         if (b.hasAttribute('data-bkexit')) { bk.admin = false; bk.edit = null; bk.sure = null; draw(); return; }
         if (b.dataset.bkedt) { bk.edit = b.dataset.bkedt; draw(); return; }
         if (b.dataset.bksave) { const id = b.dataset.bksave, ta = $('[data-bkedit="' + id + '"]', sheet); await db.doc('bacheca/' + id).update({cap: (ta ? ta.value : '').trim().slice(0, 140)}); bk.edit = null; draw(); toast(bkt('saved')); return; }
-        if (b.dataset.bkdel) { const id = b.dataset.bkdel; if (bk.sure !== id) { bk.sure = id; const f = $('#bk-feed', sheet); if (f) f.innerHTML = bkFeedHTML(); return; } bk.sure = null; await db.doc('bacheca/' + id).delete(); }
+        if (b.dataset.bkdel) { const id = b.dataset.bkdel; if (bk.sure !== id) { bk.sure = id; const f = $('#bk-feed', sheet); if (f) f.innerHTML = bkFeedHTML(); return; } bk.sure = null; try { const cs = await db.collection('bacheca/' + id + '/cm').get(); await Promise.all(cs.docs.map(d => db.doc('bacheca/' + id + '/cm/' + d.id).delete())); } catch (_) {} await db.doc('bacheca/' + id).delete(); }
       } catch (x) { toast(bkt('err')); }
     });
   }
@@ -6453,6 +6555,7 @@ function buildSecPdf(JsPDF, d, T) {
     const names = a => { const m = a.slice(0, 5).map(x => '<b>' + esc(x) + '</b>'); const rest = a.length - 5; return rest > 0 ? m.join(', ') + X.more.replace('{k}', rest) : m.length > 1 ? m.slice(0, -1).join(', ') + X.and + m[m.length - 1] : m[0]; };
     try { freshNews().slice(0, 3).forEach(n => out.push({ico: '📰', h: '<b>' + esc(X.news) + ':</b> ' + esc(n.title || '') + (n.text ? ' — ' + esc(String(n.text).replace(/\s+/g, ' ').slice(0, 90)) + (String(n.text).length > 90 ? '…' : '') : ''), news: 1})); } catch (_) {}
     const U = [...users.values()].filter(u => u && u.name);
+    if (BACHECA) bkList.filter(p => p && p.ts && now - p.ts < 14 * 864e5).sort((a, b) => b.ts - a.ts).slice(0, 6).forEach(p => out.push({ico: '📸', cg: p.id, h: esc(bkt('tkNew')).replace('{n}', '<b>' + esc(p.name || bkt('anon')) + '</b>')}));
     const nw = U.filter(u => u.createdAt && now - u.createdAt < 7 * 864e5).sort((p, q) => q.createdAt - p.createdAt).slice(0, 4);
     nw.forEach(u => out.push({ico: '👋', h: X.wel.replace('{n}', '<b>' + esc(u.name) + '</b>')}));
     {
@@ -6491,10 +6594,10 @@ function buildSecPdf(JsPDF, d, T) {
     if (!TICKER || !users || !users.size) return;
     let el = document.getElementById('ticker');
     if (!el) { el = document.createElement('div'); el.id = 'ticker'; el.className = 'tk'; el.setAttribute('role', 'marquee'); el.setAttribute('aria-label', 'News'); const pg = document.querySelector('.page'); if (!pg) return; pg.insertBefore(el, pg.firstChild);
-      el.addEventListener('click', e => { if (e.target.closest('[data-tknews]')) openNS('news', false); }); }
+      el.addEventListener('click', e => { if (e.target.closest('[data-tknews]')) openNS('news', false); const g = e.target.closest('[data-tkcg]'); if (g) { openBacheca(false); bkLBOpen(g.dataset.tkcg); } }); }
     const it = tickerItems();
     if (!it.length) { el.hidden = true; tkSig = ''; document.documentElement.style.setProperty('--tkh', '0px'); return; }
-    const seq = it.map(x => '<span class="tk-it"' + (x.news ? ' data-tknews="1" style="cursor:pointer"' : '') + '><i aria-hidden="true">' + x.ico + '</i>' + x.h + '</span>').join('<span class="tk-sep" aria-hidden="true">✦</span>');
+    const seq = it.map(x => '<span class="tk-it"' + (x.news ? ' data-tknews="1" style="cursor:pointer"' : x.cg ? ' data-tkcg="' + esc(x.cg) + '" style="cursor:pointer"' : '') + '><i aria-hidden="true">' + x.ico + '</i>' + x.h + '</span>').join('<span class="tk-sep" aria-hidden="true">✦</span>');
     const sig = seq + '|' + lang;
     el.hidden = false;
     const setH = () => document.documentElement.style.setProperty('--tkh', el.offsetHeight + 'px');
