@@ -793,6 +793,47 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
 .bk-cam{background:#000;border-radius:12px;overflow:hidden;aspect-ratio:4/3;display:flex}.bk-cam video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
 .bk-dg{margin-top:10px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}.bk-dgb{background:none;border:0;color:var(--muted,#6b5a4a);font:inherit;font-size:.82rem;text-decoration:underline;cursor:pointer;padding:2px 0}#bk-dgout{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;box-sizing:border-box;user-select:all}
 .bk-file{cursor:pointer;display:inline-flex;align-items:center}
+/* ChioscoGram: finestra grande, tema smeraldo */
+.overlay:has(.sheet.cg){padding:14px}
+.sheet.cg{--surface:#0a3b2e;--surface-2:#0e4f3d;--ink:#eafff6;--line:rgba(110,231,183,.30);--muted:#8fd6b8;--page-muted:#8fd6b8;
+  max-width:min(1180px,96vw);width:96vw;max-height:94vh;border-radius:20px;border:1px solid #10b981;
+  background:radial-gradient(120% 90% at 0% 0%,#0f5a45 0%,#064e3b 38%,#022c22 100%);
+  box-shadow:0 0 0 1px rgba(16,185,129,.35),0 24px 70px rgba(0,0,0,.6),0 0 60px rgba(16,185,129,.18);color:#eafff6}
+.sheet.cg h2,.sheet.cg .doc-head h2{color:#a7f3d0;text-shadow:0 0 18px rgba(52,211,153,.35)}
+.sheet.cg .ns-intro,.sheet.cg .ns-note,.sheet.cg p{color:#b6f0d6}
+.sheet.cg .ns-note{background:rgba(16,185,129,.14);border:1px solid rgba(52,211,153,.4);border-radius:10px;padding:8px 12px}
+.sheet.cg .btn{border-color:rgba(110,231,183,.45);color:#d1fae5;background:rgba(6,78,59,.55)}
+.sheet.cg .btn:hover{background:rgba(16,185,129,.28);border-color:#34d399}
+.sheet.cg .btn.ghost{background:transparent}
+.sheet.cg .btn.primary{background:linear-gradient(135deg,#34d399,#059669);border-color:#6ee7b7;color:#022c22;font-weight:800;box-shadow:0 4px 16px rgba(16,185,129,.4)}
+.sheet.cg .btn.primary:hover{filter:brightness(1.1)}
+.sheet.cg .btn.danger{background:rgba(185,28,28,.85);color:#fff;border-color:#fca5a5}
+.sheet.cg .xbtn{color:#a7f3d0;border-color:rgba(110,231,183,.45)}
+.sheet.cg .bk-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:26px 20px;padding:14px 6px}
+.sheet.cg .bk-card{background:#f4fff9;box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 0 1px rgba(110,231,183,.35)}
+.sheet.cg .bk-tape{background:rgba(110,231,183,.7)}
+.sheet.cg .bk-img{background:#cdeedd}
+.sheet.cg .bk-like,.sheet.cg .cg-like{border-color:#a7e3c9;background:#fff}
+.sheet.cg input,.sheet.cg textarea,.sheet.cg select{background:#07372a;color:#eafff6;border-color:rgba(110,231,183,.4)}
+.sheet.cg ::placeholder{color:#7fc4a7}
+.sheet.cg .bk-chip{background:rgba(16,185,129,.2);border-color:#34d399;color:#eafff6}
+.sheet.cg .bk-opt:hover,.sheet.cg .bk-opt:focus{background:rgba(16,185,129,.25)}
+.sheet.cg .bk-e{background:#07372a;border-color:rgba(110,231,183,.4)}
+.sheet.cg .bk-e:hover,.sheet.cg .bk-e.on{background:#10b981;border-color:#6ee7b7}
+.sheet.cg .bk-cam{box-shadow:0 0 0 2px #34d399,0 8px 24px rgba(0,0,0,.5)}
+.sheet.cg .bk-prev{box-shadow:0 0 0 2px #34d399,0 8px 24px rgba(0,0,0,.5)}
+.sheet.cg .bk-none,.sheet.cg .bk-lab{color:#b6f0d6}
+.sheet.cg::-webkit-scrollbar{width:10px}.sheet.cg::-webkit-scrollbar-thumb{background:#10b981;border-radius:8px}.sheet.cg::-webkit-scrollbar-track{background:#022c22}
+@media (max-width:640px){.sheet.cg{width:100%;max-height:96vh}}
+.sheet.cg .bk-card p,.sheet.cg .bk-cap{color:#0b3d2e}
+.sheet.cg [hidden]{display:none!important}
+.sheet.cg .bk-cam{width:min(640px,calc(56vh*4/3),100%);margin:0 auto}
+.sheet.cg .bk-prev{max-width:min(420px,calc(40vh*4/3))}
+.bk-cam{position:relative}
+.bk-cd{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 9rem/1 system-ui,sans-serif;color:#fff;text-shadow:0 0 30px #059669,0 4px 18px rgba(0,0,0,.7);pointer-events:none}
+.sheet.cg .bk-comp select.bk-tm{width:auto;flex:none}
+.sheet.cg .bk-tm{font:inherit;border:1px solid rgba(110,231,183,.5);border-radius:10px;padding:10px 12px;background:#07372a;color:#eafff6}
+
 .bk-prev{display:block;width:100%;max-width:420px;align-self:center;aspect-ratio:4/3;object-fit:cover;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .bk-lab{font-weight:700;font-size:.9rem}
 .bk-q{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;box-sizing:border-box}
@@ -1081,7 +1122,6 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
     </symbol>
   </defs>
 </svg>
-
 
 <div class="page">
   <div class="stick">
@@ -4282,10 +4322,10 @@ function buildSecPdf(JsPDF, d, T) {
 
 
   /* ---------- Bacheca (solo area test): foto + didascalia, il "social" del chiosco ---------- */
-  const BACHECA = false;
+  const BACHECA = true;
   const BKT = {
-    it: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Gli scatti di pausa del chiosco: fai una foto dal PC, scrivi due righe e finisce qui, visibile a tutti i colleghi. Metti un ❤️ ai post che ti piacciono!', snap: 'Scatta una foto', shoot: 'Scatta', retake: 'Rifai la foto', cancel: 'Annulla', who: 'Chi sei?', whoPh: 'Scegli il tuo nome', search: 'Cerca il tuo nome…', noUser: 'Nessun utente trovato', chg: 'Cambia', cap: 'Didascalia', capPh: 'Scrivi qualcosa… (puoi usare le emoji)', emo: 'Emoji', post: 'Pubblica', empty: 'ChioscoGram è ancora vuoto: sii il primo a scattare una foto!', you: 'Tu', like: 'Mi piace', camErr: 'Ho aperto la finestra della fotocamera: scatta lì (autoscatto fino a 10 secondi) e la foto torna qui da sola. Non la vedi? Riaprila oppure scegli una foto dal PC.', popBtn: 'Riapri la finestra della fotocamera', diag: 'Diagnostica fotocamera', linkBtn: 'Apri la fotocamera (nuova scheda)', diagRun: 'Sto controllando…', diagCopy: 'Copia il risultato', copied: 'Copiato', camT: 'Fotocamera', timer: 'Autoscatto', now: 'Subito', popErr: 'Questa pagina non può aprire finestre né la fotocamera: usa “Scegli una foto” (puoi scattarla con l’app Fotocamera del PC).', popWait: 'Finestra fotocamera aperta: scatta lì…', pick: 'Scegli una foto', needImg: 'Prima scatta o scegli una foto.', needWho: 'Scegli il tuo nome.', wait: 'Aspetta qualche secondo prima di pubblicare di nuovo.', ok: 'Pubblicato su ChioscoGram!', err: 'Qualcosa è andato storto, riprova.', admBtn: 'Modera (admin)', admMode: 'Modalità admin: puoi modificare le didascalie ed eliminare i post.', exit: 'Esci dalla modalità admin', edit: 'Modifica', save: 'Salva', del: 'Elimina', sure: 'Confermi?', saved: 'Salvato', close: 'Chiudi', anon: 'Qualcuno', live: 'Scatto in corso'},
-    en: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Snapshots from the coffee break: take a photo from the PC, write a line and it lands here for all colleagues to see. Drop a ❤️ on the posts you like!', snap: 'Take a photo', shoot: 'Snap', retake: 'Retake', cancel: 'Cancel', who: 'Who are you?', whoPh: 'Pick your name', search: 'Search your name…', noUser: 'No user found', chg: 'Change', cap: 'Caption', capPh: 'Write something… (emoji welcome)', emo: 'Emoji', post: 'Post', empty: 'ChioscoGram is still empty: be the first to post a photo!', you: 'You', like: 'Like', camErr: 'I opened the camera window: snap there (self-timer up to 10 seconds) and the photo comes back here by itself. Can’t see it? Reopen it or choose a photo from the PC.', popBtn: 'Reopen the camera window', diag: 'Camera diagnostics', linkBtn: 'Open camera (new tab)', diagRun: 'Checking…', diagCopy: 'Copy result', copied: 'Copied', camT: 'Camera', timer: 'Self-timer', now: 'Now', popErr: 'This page can’t open windows or the camera: use “Choose a photo” (you can take it with the PC’s Camera app).', popWait: 'Camera window open: snap there…', pick: 'Choose a photo', needImg: 'Take or choose a photo first.', needWho: 'Pick your name.', wait: 'Wait a few seconds before posting again.', ok: 'Posted on ChioscoGram!', err: 'Something went wrong, try again.', admBtn: 'Moderate (admin)', admMode: 'Admin mode: you can edit captions and delete posts.', exit: 'Exit admin mode', edit: 'Edit', save: 'Save', del: 'Delete', sure: 'Sure?', saved: 'Saved', close: 'Close', anon: 'Someone', live: 'Taking photo'}
+    it: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Gli scatti di pausa del chiosco: fai una foto dal PC, scrivi due righe e finisce qui, visibile a tutti i colleghi. Metti un ❤️ ai post che ti piacciono!', snap: 'Scatta una foto', shoot: 'Scatta', retake: 'Rifai la foto', cancel: 'Annulla', who: 'Chi sei?', whoPh: 'Scegli il tuo nome', search: 'Cerca il tuo nome…', noUser: 'Nessun utente trovato', chg: 'Cambia', cap: 'Didascalia', capPh: 'Scrivi qualcosa… (puoi usare le emoji)', emo: 'Emoji', post: 'Pubblica', empty: 'ChioscoGram è ancora vuoto: sii il primo a scattare una foto!', you: 'Tu', like: 'Mi piace', camErr: 'Ho aperto la finestra della fotocamera: scatta lì (autoscatto fino a 10 secondi) e la foto torna qui da sola. Non la vedi? Riaprila oppure scegli una foto dal PC.', popBtn: 'Riapri la finestra della fotocamera', diag: 'Diagnostica fotocamera', timerL: 'Autoscatto', noTimer: 'Subito', linkBtn: 'Apri la fotocamera (nuova scheda)', diagRun: 'Sto controllando…', diagCopy: 'Copia il risultato', copied: 'Copiato', camT: 'Fotocamera', timer: 'Autoscatto', now: 'Subito', popErr: 'Questa pagina non può aprire finestre né la fotocamera: usa “Scegli una foto” (puoi scattarla con l’app Fotocamera del PC).', popWait: 'Finestra fotocamera aperta: scatta lì…', pick: 'Scegli una foto', needImg: 'Prima scatta o scegli una foto.', needWho: 'Scegli il tuo nome.', wait: 'Aspetta qualche secondo prima di pubblicare di nuovo.', ok: 'Pubblicato su ChioscoGram!', err: 'Qualcosa è andato storto, riprova.', admBtn: 'Modera (admin)', admMode: 'Modalità admin: puoi modificare le didascalie ed eliminare i post.', exit: 'Esci dalla modalità admin', edit: 'Modifica', save: 'Salva', del: 'Elimina', sure: 'Confermi?', saved: 'Salvato', close: 'Chiudi', anon: 'Qualcuno', live: 'Scatto in corso'},
+    en: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Snapshots from the coffee break: take a photo from the PC, write a line and it lands here for all colleagues to see. Drop a ❤️ on the posts you like!', snap: 'Take a photo', shoot: 'Snap', retake: 'Retake', cancel: 'Cancel', who: 'Who are you?', whoPh: 'Pick your name', search: 'Search your name…', noUser: 'No user found', chg: 'Change', cap: 'Caption', capPh: 'Write something… (emoji welcome)', emo: 'Emoji', post: 'Post', empty: 'ChioscoGram is still empty: be the first to post a photo!', you: 'You', like: 'Like', camErr: 'I opened the camera window: snap there (self-timer up to 10 seconds) and the photo comes back here by itself. Can’t see it? Reopen it or choose a photo from the PC.', popBtn: 'Reopen the camera window', diag: 'Camera diagnostics', timerL: 'Self-timer', noTimer: 'Now', linkBtn: 'Open camera (new tab)', diagRun: 'Checking…', diagCopy: 'Copy result', copied: 'Copied', camT: 'Camera', timer: 'Self-timer', now: 'Now', popErr: 'This page can’t open windows or the camera: use “Choose a photo” (you can take it with the PC’s Camera app).', popWait: 'Camera window open: snap there…', pick: 'Choose a photo', needImg: 'Take or choose a photo first.', needWho: 'Pick your name.', wait: 'Wait a few seconds before posting again.', ok: 'Posted on ChioscoGram!', err: 'Something went wrong, try again.', admBtn: 'Moderate (admin)', admMode: 'Admin mode: you can edit captions and delete posts.', exit: 'Exit admin mode', edit: 'Edit', save: 'Save', del: 'Delete', sure: 'Sure?', saved: 'Saved', close: 'Close', anon: 'Someone', live: 'Taking photo'}
   };
   const bkt = k => (BKT[lang] && BKT[lang][k]) || BKT.it[k] || k;
   const BK_EMO = ['☕', '🥐', '😀', '😂', '😍', '😎', '🔥', '👏', '🎉', '❤️', '👍', '🍪', '🍕', '😴', '🤪'];
@@ -4380,10 +4420,10 @@ function buildSecPdf(JsPDF, d, T) {
   }
   function bkComposerHTML() {
     if (bk.step === 'cam') {
-      return '<div class="bk-comp">' + (bk.camFail ? '<p class="ns-note" role="status">' + esc(bkt('camErr')) + '</p>' : '<div class="bk-cam"><video id="bk-vid" autoplay playsinline muted></video></div>') +
+      return '<div class="bk-comp">' + (bk.camFail ? '<p class="ns-note" role="status">' + esc(bkt('camErr')) + '</p>' : '<div class="bk-cam"><video id="bk-vid" autoplay playsinline muted></video><div id="bk-cd" class="bk-cd" hidden></div></div>') +
         '<div class="m-actions"><button class="btn ghost" type="button" data-bkcancel>' + esc(bkt('cancel')) + '</button>' +
-        (bk.camFail ? '<button class="btn primary" type="button" data-bkpop>📸 ' + esc(bkt('popBtn')) + '</button>' : '<button class="btn primary" type="button" data-bkshoot>📸 ' + esc(bkt('shoot')) + '</button>') +
-        '<a class="btn primary" target="_blank" href="#bkcam" data-bklink>📸 ' + esc(bkt('linkBtn')) + '</a><label class="btn ' + (bk.camFail ? 'primary' : 'ghost') + ' bk-file">' + esc(bkt('pick')) + '<input type="file" id="bk-file" accept="image/*" capture="user" hidden></label></div><div class="bk-dg"><button type="button" class="bk-dgb" data-bkdiag>🔧 ' + esc(bkt('diag')) + '</button><pre id="bk-dgout" hidden></pre><button type="button" class="btn ghost" data-bkdgcopy hidden>' + esc(bkt('diagCopy')) + '</button></div></div>';
+        (bk.camFail ? '<button class="btn primary" type="button" data-bkpop>📸 ' + esc(bkt('popBtn')) + '</button>' : '<select id="bk-tm" class="bk-tm" aria-label="' + esc(bkt('timerL')) + '">' + [0,1,2,3,4,5,6,7,8,9,10].map(n => '<option value="' + n + '"' + (n === bk.timer ? ' selected' : '') + '>' + (n ? n + ' s' : bkt('noTimer')) + '</option>').join('') + '</select><button class="btn primary" type="button" data-bkshoot>📸 ' + esc(bkt('shoot')) + '</button>') +
+        '<label class="btn ' + (bk.camFail ? 'primary' : 'ghost') + ' bk-file">' + esc(bkt('pick')) + '<input type="file" id="bk-file" accept="image/*" capture="user" hidden></label></div></div>';
     }
     const users2 = [...users.values()].filter(u => u.name).sort((a, b) => a.name.localeCompare(b.name, 'it'));
     return '<form class="bk-comp ns-form" id="bk-form" novalidate><img class="bk-prev" src="' + esc(bk.img) + '" alt="">' +
@@ -4430,6 +4470,7 @@ function buildSecPdf(JsPDF, d, T) {
   function openBacheca(admin) {
     bk.admin = !!admin; bk.step = 'feed'; bk.img = ''; bk.who = ''; bk.cap = ''; bk.sure = null; bk.edit = null; bk.camFail = false;
     const sheet = openModal(bkHTML(), {doc: true, onClose: bkStop});
+    sheet.classList.add('cg');
     const draw = () => { sheet.innerHTML = bkHTML(); if (bk.step === 'cam') bkAttachCam(sheet); };
     bk.draw = draw;
     modal.rerender = () => { setTimeout(() => { if (bk.step === 'cam') bkAttachCam(sheet); }, 0); return bkHTML(); };
@@ -4461,14 +4502,23 @@ function buildSecPdf(JsPDF, d, T) {
     sheet.addEventListener('click', async e => {
       const b = e.target.closest('button'); if (!b) return;
       try {
-        if (b.hasAttribute('data-bksnap')) { bk.step = 'cam'; bk.camFail = true; draw(); bkPopup(sheet, draw); return; }
+        if (b.hasAttribute('data-bksnap')) { bk.step = 'cam'; bk.camFail = !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.top === window.self); draw(); if (bk.camFail) bkPopup(sheet, draw); return; }
         if (b.dataset.bkpick) { bk.who = b.dataset.bkpick; draw(); const c = $('#bk-cap', sheet); if (c) c.focus(); err(''); return; }
         if (b.hasAttribute('data-bkchg')) { bk.who = ''; draw(); const q = $('#bk-q', sheet); if (q) q.focus(); return; }
         if (b.dataset.bklike) { const id = b.dataset.bklike, pp = bkList.find(v => v.id === id); if (!pp) return; pp.lk = (pp.lk || 0) + 1; modal.bkPaint(); const hb = $('[data-bklike="' + id + '"]', sheet); if (hb) { hb.classList.remove('pop'); void hb.offsetWidth; hb.classList.add('pop'); } await db.doc('bacheca/' + id).update({lk: pp.lk}); return; }
         if (b.hasAttribute('data-bkdiag')) { const o = $('#bk-dgout', sheet); o.hidden = false; o.textContent = bkt('diagRun'); o.textContent = await bkDiag(); const cb = $('[data-bkdgcopy]', sheet); if (cb) cb.hidden = false; return; }
         if (b.hasAttribute('data-bkdgcopy')) { const o = $('#bk-dgout', sheet); try { await navigator.clipboard.writeText(o.textContent); toast(bkt('copied')); } catch (_) { const r = document.createRange(); r.selectNodeContents(o); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); } return; }
         if (b.hasAttribute('data-bkpop')) { bkPopup(sheet, draw); return; }
-        if (b.hasAttribute('data-bkshoot')) { const v = $('#bk-vid', sheet); if (!v || !v.videoWidth) return; bk.img = bkShrink(v, v.videoWidth, v.videoHeight, true); bkStop(); bk.step = 'form'; draw(); return; }
+        if (b.hasAttribute('data-bkshoot')) {
+          const v = $('#bk-vid', sheet); if (!v || !v.videoWidth) return;
+          const snap = () => { bk.img = bkShrink(v, v.videoWidth, v.videoHeight, true); bkStop(); bk.step = 'form'; draw(); };
+          const sel = $('#bk-tm', sheet); bk.timer = sel ? +sel.value : bk.timer;
+          if (!bk.timer) { snap(); return; }
+          b.disabled = true; if (sel) sel.disabled = true;
+          const cd = $('#bk-cd', sheet); let n = bk.timer;
+          const tick = () => { if (!modal || !modal.bkOpen || bk.step !== 'cam') return; if (cd) { cd.hidden = false; cd.textContent = n; } if (n <= 0) { if (cd) cd.hidden = true; snap(); return; } n--; setTimeout(tick, 1000); };
+          tick(); return;
+        }
         if (b.hasAttribute('data-bkcancel')) { bkStop(); bk.step = 'feed'; bk.edit = null; bk.img = ''; draw(); return; }
         if (b.dataset.bkemo) { const ta = $('#bk-cap', sheet); if (!ta) return; const s = ta.selectionStart == null ? ta.value.length : ta.selectionStart, en = ta.selectionEnd == null ? s : ta.selectionEnd, nv = ta.value.slice(0, s) + b.dataset.bkemo + ta.value.slice(en); if (nv.length > 140) return; ta.value = nv; bk.cap = nv; ta.focus(); ta.selectionStart = ta.selectionEnd = s + b.dataset.bkemo.length; const c = $('#bk-cnt', sheet); if (c) c.textContent = String(140 - nv.length); return; }
         if (b.hasAttribute('data-bkadm')) { openPin(() => openBacheca(true)); return; }
