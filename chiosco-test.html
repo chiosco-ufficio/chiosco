@@ -853,7 +853,7 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
 .bk-cm-bar{display:flex;align-items:center;gap:10px;justify-content:flex-end}
 .bk-cm-bar .err{margin:0;flex:1}
 .bk-lb .bk-lab,.bk-lb .bk-none{color:#0b3d2e}
-.bk-cmb{margin-left:6px}
+.bk-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.bk-cmb{margin-left:0}
 .bk-lb-img{width:min(calc(92vw - 40px),1000px,calc((94vh - 480px)*1.3333),calc(100vw - 150px))!important;min-width:240px}
 .bk-lb-x{position:absolute;top:14px;right:16px;width:46px;height:46px;border-radius:50%;border:1px solid #6ee7b7;background:rgba(6,78,59,.85);color:#d1fae5;font-size:1.3rem;cursor:pointer;z-index:2}
 .bk-lb-x:hover{background:#10b981;color:#022c22}
@@ -4553,7 +4553,7 @@ function buildSecPdf(JsPDF, d, T) {
       let h = '<article class="bk-card" style="--r:' + ((i % 3) - 1) * 1.3 + 'deg"><span class="bk-tape" aria-hidden="true"></span><img class="bk-img" src="' + esc(p.img || '') + '" alt="" loading="lazy" data-bkzoom="' + esc(p.id) + '">';
       h += ed ? '<textarea class="bk-edit" data-bkedit="' + esc(p.id) + '" maxlength="140" aria-label="' + esc(bkt('cap')) + '">' + esc(p.cap || '') + '</textarea>' : (p.cap ? '<p class="bk-cap" data-bkzoom="' + esc(p.id) + '">' + esc(p.cap) + '</p>' : '');
       h += '<div class="bk-meta">' + bkAuthor(p) + '<span class="bk-dt">' + esc(bkDate(p.ts)) + '</span></div>';
-      h += '<button type="button" class="cg-like' + (p.lk ? ' on' : '') + '" data-bklike="' + esc(p.id) + '" aria-label="' + esc(bkt('like')) + '"><i>' + (p.lk ? '❤️' : '🤍') + '</i> <b>' + (p.lk || 0) + '</b></button><button type="button" class="cg-like bk-cmb" data-bkzoom="' + esc(p.id) + '" aria-label="' + esc(bkt('cm')) + '"><i>💬</i> <b>' + (p.nc || 0) + '</b></button>';
+      h += '<div class="bk-acts"><button type="button" class="cg-like' + (p.lk ? ' on' : '') + '" data-bklike="' + esc(p.id) + '" aria-label="' + esc(bkt('like')) + '"><i>' + (p.lk ? '❤️' : '🤍') + '</i> <b>' + (p.lk || 0) + '</b></button><button type="button" class="cg-like bk-cmb" data-bkzoom="' + esc(p.id) + '" aria-label="' + esc(bkt('cm')) + '"><i>💬</i> <b>' + (p.nc || 0) + '</b></button></div>';
       if (bk.admin) h += '<div class="ns-acts">' + (ed ? '<button class="btn primary" type="button" data-bksave="' + esc(p.id) + '">' + esc(bkt('save')) + '</button><button class="btn ghost" type="button" data-bkcancel>' + esc(bkt('cancel')) + '</button>' : '<button class="btn ghost" type="button" data-bkedt="' + esc(p.id) + '">' + esc(bkt('edit')) + '</button>') +
         '<button class="btn ' + (bk.sure === p.id ? 'danger' : 'ghost') + '" type="button" data-bkdel="' + esc(p.id) + '">' + ICON.trash + esc(bk.sure === p.id ? bkt('sure') : bkt('del')) + '</button></div>';
       return h + '</article>';
