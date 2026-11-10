@@ -1208,7 +1208,7 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
         <option value="high" data-i18n="sortHigh"></option>
         <option value="low" data-i18n="sortLow"></option>
         <option value="cons" data-i18n="sortCons"></option>
-        <option value="recent" data-i18n="sortRecent"></option>
+        <option value="recent" selected data-i18n="sortRecent"></option>
       </select>
     </label>
   </div>
@@ -1594,7 +1594,7 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
   let unavailable = false;
   let users = new Map();
   const pending = new Set();
-  const state = {q: '', floor: null, sort: 'name'};
+  const state = {q: '', floor: null, sort: 'recent'};
   const qtyMap = new Map();
   const CONS = ['caffe', 'golden', 'multi'];
   const listEl = $('#list');
