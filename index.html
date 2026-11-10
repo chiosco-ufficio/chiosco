@@ -830,6 +830,22 @@ svg.brand-logo{width:auto;background:none;filter:drop-shadow(0 .06em .07em rgba(
 .sheet.cg .bk-cam{width:min(640px,calc(56vh*4/3),100%);margin:0 auto}
 .sheet.cg .bk-prev{max-width:min(420px,calc(40vh*4/3))}
 .bk-cam{position:relative}
+.bk-lb{position:fixed;inset:0;z-index:100000;background:rgba(2,24,18,.9);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;cursor:zoom-out}
+.bk-lb[hidden]{display:none!important}
+.bk-lb-fig{margin:0;display:flex;flex-direction:column;align-items:stretch;gap:10px;max-width:min(92vw,1100px);max-height:94vh;background:#f4fff9;color:#0b3d2e;border-radius:10px;padding:14px 14px 12px;box-shadow:0 0 0 2px #34d399,0 30px 90px rgba(0,0,0,.65),0 0 70px rgba(16,185,129,.25);cursor:default}
+.bk-lb-img{display:block;width:min(calc(92vw - 40px),1000px,calc((94vh - 150px)*1.3333));height:auto;aspect-ratio:4/3;margin:0 auto;border-radius:6px;object-fit:contain;background:#cdeedd}
+.bk-lb-cap{margin:0;font-size:1.25rem;line-height:1.35;font-weight:600;color:#0b3d2e;overflow-wrap:anywhere}
+.bk-lb-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.bk-lb-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#0b3d2e}
+.bk-lb-like{font-size:1.15rem;padding:8px 16px}
+.bk-lb-x{position:absolute;top:14px;right:16px;width:46px;height:46px;border-radius:50%;border:1px solid #6ee7b7;background:rgba(6,78,59,.85);color:#d1fae5;font-size:1.3rem;cursor:pointer;z-index:2}
+.bk-lb-x:hover{background:#10b981;color:#022c22}
+.bk-lb-nav{flex:none;width:52px;height:52px;border-radius:50%;border:1px solid #6ee7b7;background:rgba(6,78,59,.85);color:#d1fae5;font-size:2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+.bk-lb-nav:hover{background:#10b981;color:#022c22}
+.bk-lb-nav[hidden]{display:none}
+.bk-img[data-bkzoom],.bk-cap[data-bkzoom]{cursor:zoom-in}
+@media (max-width:640px){.bk-lb{padding:8px;gap:4px}.bk-lb-nav{width:40px;height:40px;font-size:1.5rem}.bk-lb-cap{font-size:1.05rem}}
+
 .bk-cd{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 9rem/1 system-ui,sans-serif;color:#fff;text-shadow:0 0 30px #059669,0 4px 18px rgba(0,0,0,.7);pointer-events:none}
 .sheet.cg .bk-comp select.bk-tm{width:auto;flex:none}
 .sheet.cg .bk-tm{font:inherit;border:1px solid rgba(110,231,183,.5);border-radius:10px;padding:10px 12px;background:#07372a;color:#eafff6}
@@ -4324,8 +4340,8 @@ function buildSecPdf(JsPDF, d, T) {
   /* ---------- Bacheca (solo area test): foto + didascalia, il "social" del chiosco ---------- */
   const BACHECA = true;
   const BKT = {
-    it: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Gli scatti di pausa del chiosco: fai una foto dal PC, scrivi due righe e finisce qui, visibile a tutti i colleghi. Metti un ❤️ ai post che ti piacciono!', snap: 'Scatta una foto', shoot: 'Scatta', retake: 'Rifai la foto', cancel: 'Annulla', who: 'Chi sei?', whoPh: 'Scegli il tuo nome', search: 'Cerca il tuo nome…', noUser: 'Nessun utente trovato', chg: 'Cambia', cap: 'Didascalia', capPh: 'Scrivi qualcosa… (puoi usare le emoji)', emo: 'Emoji', post: 'Pubblica', empty: 'ChioscoGram è ancora vuoto: sii il primo a scattare una foto!', you: 'Tu', like: 'Mi piace', camErr: 'Ho aperto la finestra della fotocamera: scatta lì (autoscatto fino a 10 secondi) e la foto torna qui da sola. Non la vedi? Riaprila oppure scegli una foto dal PC.', popBtn: 'Riapri la finestra della fotocamera', diag: 'Diagnostica fotocamera', timerL: 'Autoscatto', noTimer: 'Subito', linkBtn: 'Apri la fotocamera (nuova scheda)', diagRun: 'Sto controllando…', diagCopy: 'Copia il risultato', copied: 'Copiato', camT: 'Fotocamera', timer: 'Autoscatto', now: 'Subito', popErr: 'Questa pagina non può aprire finestre né la fotocamera: usa “Scegli una foto” (puoi scattarla con l’app Fotocamera del PC).', popWait: 'Finestra fotocamera aperta: scatta lì…', pick: 'Scegli una foto', needImg: 'Prima scatta o scegli una foto.', needWho: 'Scegli il tuo nome.', wait: 'Aspetta qualche secondo prima di pubblicare di nuovo.', ok: 'Pubblicato su ChioscoGram!', err: 'Qualcosa è andato storto, riprova.', admBtn: 'Modera (admin)', admMode: 'Modalità admin: puoi modificare le didascalie ed eliminare i post.', exit: 'Esci dalla modalità admin', edit: 'Modifica', save: 'Salva', del: 'Elimina', sure: 'Confermi?', saved: 'Salvato', close: 'Chiudi', anon: 'Qualcuno', live: 'Scatto in corso'},
-    en: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Snapshots from the coffee break: take a photo from the PC, write a line and it lands here for all colleagues to see. Drop a ❤️ on the posts you like!', snap: 'Take a photo', shoot: 'Snap', retake: 'Retake', cancel: 'Cancel', who: 'Who are you?', whoPh: 'Pick your name', search: 'Search your name…', noUser: 'No user found', chg: 'Change', cap: 'Caption', capPh: 'Write something… (emoji welcome)', emo: 'Emoji', post: 'Post', empty: 'ChioscoGram is still empty: be the first to post a photo!', you: 'You', like: 'Like', camErr: 'I opened the camera window: snap there (self-timer up to 10 seconds) and the photo comes back here by itself. Can’t see it? Reopen it or choose a photo from the PC.', popBtn: 'Reopen the camera window', diag: 'Camera diagnostics', timerL: 'Self-timer', noTimer: 'Now', linkBtn: 'Open camera (new tab)', diagRun: 'Checking…', diagCopy: 'Copy result', copied: 'Copied', camT: 'Camera', timer: 'Self-timer', now: 'Now', popErr: 'This page can’t open windows or the camera: use “Choose a photo” (you can take it with the PC’s Camera app).', popWait: 'Camera window open: snap there…', pick: 'Choose a photo', needImg: 'Take or choose a photo first.', needWho: 'Pick your name.', wait: 'Wait a few seconds before posting again.', ok: 'Posted on ChioscoGram!', err: 'Something went wrong, try again.', admBtn: 'Moderate (admin)', admMode: 'Admin mode: you can edit captions and delete posts.', exit: 'Exit admin mode', edit: 'Edit', save: 'Save', del: 'Delete', sure: 'Sure?', saved: 'Saved', close: 'Close', anon: 'Someone', live: 'Taking photo'}
+    it: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Gli scatti di pausa del chiosco: fai una foto dal PC, scrivi due righe e finisce qui, visibile a tutti i colleghi. Metti un ❤️ ai post che ti piacciono!', snap: 'Scatta una foto', shoot: 'Scatta', retake: 'Rifai la foto', cancel: 'Annulla', who: 'Chi sei?', whoPh: 'Scegli il tuo nome', search: 'Cerca il tuo nome…', noUser: 'Nessun utente trovato', chg: 'Cambia', cap: 'Didascalia', capPh: 'Scrivi qualcosa… (puoi usare le emoji)', emo: 'Emoji', post: 'Pubblica', empty: 'ChioscoGram è ancora vuoto: sii il primo a scattare una foto!', you: 'Tu', like: 'Mi piace', camErr: 'Ho aperto la finestra della fotocamera: scatta lì (autoscatto fino a 10 secondi) e la foto torna qui da sola. Non la vedi? Riaprila oppure scegli una foto dal PC.', popBtn: 'Riapri la finestra della fotocamera', close: 'Chiudi', diag: 'Diagnostica fotocamera', timerL: 'Autoscatto', noTimer: 'Subito', linkBtn: 'Apri la fotocamera (nuova scheda)', diagRun: 'Sto controllando…', diagCopy: 'Copia il risultato', copied: 'Copiato', camT: 'Fotocamera', timer: 'Autoscatto', now: 'Subito', popErr: 'Questa pagina non può aprire finestre né la fotocamera: usa “Scegli una foto” (puoi scattarla con l’app Fotocamera del PC).', popWait: 'Finestra fotocamera aperta: scatta lì…', pick: 'Scegli una foto', needImg: 'Prima scatta o scegli una foto.', needWho: 'Scegli il tuo nome.', wait: 'Aspetta qualche secondo prima di pubblicare di nuovo.', ok: 'Pubblicato su ChioscoGram!', err: 'Qualcosa è andato storto, riprova.', admBtn: 'Modera (admin)', admMode: 'Modalità admin: puoi modificare le didascalie ed eliminare i post.', exit: 'Esci dalla modalità admin', edit: 'Modifica', save: 'Salva', del: 'Elimina', sure: 'Confermi?', saved: 'Salvato', close: 'Chiudi', anon: 'Qualcuno', live: 'Scatto in corso'},
+    en: {nav: 'ChioscoGram', title: 'ChioscoGram', intro: 'Snapshots from the coffee break: take a photo from the PC, write a line and it lands here for all colleagues to see. Drop a ❤️ on the posts you like!', snap: 'Take a photo', shoot: 'Snap', retake: 'Retake', cancel: 'Cancel', who: 'Who are you?', whoPh: 'Pick your name', search: 'Search your name…', noUser: 'No user found', chg: 'Change', cap: 'Caption', capPh: 'Write something… (emoji welcome)', emo: 'Emoji', post: 'Post', empty: 'ChioscoGram is still empty: be the first to post a photo!', you: 'You', like: 'Like', camErr: 'I opened the camera window: snap there (self-timer up to 10 seconds) and the photo comes back here by itself. Can’t see it? Reopen it or choose a photo from the PC.', popBtn: 'Reopen the camera window', close: 'Close', diag: 'Camera diagnostics', timerL: 'Self-timer', noTimer: 'Now', linkBtn: 'Open camera (new tab)', diagRun: 'Checking…', diagCopy: 'Copy result', copied: 'Copied', camT: 'Camera', timer: 'Self-timer', now: 'Now', popErr: 'This page can’t open windows or the camera: use “Choose a photo” (you can take it with the PC’s Camera app).', popWait: 'Camera window open: snap there…', pick: 'Choose a photo', needImg: 'Take or choose a photo first.', needWho: 'Pick your name.', wait: 'Wait a few seconds before posting again.', ok: 'Posted on ChioscoGram!', err: 'Something went wrong, try again.', admBtn: 'Moderate (admin)', admMode: 'Admin mode: you can edit captions and delete posts.', exit: 'Exit admin mode', edit: 'Edit', save: 'Save', del: 'Delete', sure: 'Sure?', saved: 'Saved', close: 'Close', anon: 'Someone', live: 'Taking photo'}
   };
   const bkt = k => (BKT[lang] && BKT[lang][k]) || BKT.it[k] || k;
   const BK_EMO = ['☕', '🥐', '😀', '😂', '😍', '😎', '🔥', '👏', '🎉', '❤️', '👍', '🍪', '🍕', '😴', '🤪'];
@@ -4367,6 +4383,7 @@ function buildSecPdf(JsPDF, d, T) {
       db.collection('bacheca').orderBy('ts', 'desc').limit(40).onSnapshot(sn => {
         bkList = sn.docs.map(d => Object.assign({id: d.id}, d.data()));
         if (modal && modal.bkPaint) modal.bkPaint();
+        bkLBPaint(false);
         cgRefresh(); if (modal && modal.bkOpen) cgMarkSeen();
       }, () => {});
     } catch (_) {}
@@ -4376,12 +4393,62 @@ function buildSecPdf(JsPDF, d, T) {
     const u = p.uid && users.get(p.uid);
     return '<span class="bk-who">' + (u ? faceHTML(u) : '') + '<b>' + esc(p.name || bkt('anon')) + '</b></span>';
   }
+
+  // ---- ChioscoGram: visione ingrandita a centro schermo (foto + didascalia + like) ----
+  let bkLBId = null;
+  function bkLBEl() {
+    let el = document.getElementById('bk-lb'); if (el) return el;
+    el = document.createElement('div'); el.id = 'bk-lb'; el.className = 'bk-lb'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true');
+    el.innerHTML = '<button type="button" class="bk-lb-x" data-lbx aria-label="' + esc(bkt('close')) + '">✕</button>' +
+      '<button type="button" class="bk-lb-nav prev" data-lbp aria-label="‹">‹</button>' +
+      '<figure class="bk-lb-fig"><img class="bk-lb-img" alt=""><figcaption><p class="bk-lb-cap"></p><div class="bk-lb-row"><div class="bk-lb-meta"></div><button type="button" class="cg-like bk-lb-like" data-lblike aria-label="' + esc(bkt('like')) + '"><i></i> <b></b></button></div></figcaption></figure>' +
+      '<button type="button" class="bk-lb-nav next" data-lbn aria-label="›">›</button>';
+    el.addEventListener('click', ev => {
+      const t = ev.target;
+      if (t.closest('[data-lbx]') || t === el) { bkLBClose(); return; }
+      if (t.closest('[data-lbp]')) { bkLBStep(-1); return; }
+      if (t.closest('[data-lbn]')) { bkLBStep(1); return; }
+      if (t.closest('[data-lblike]')) { bkLikeDo(bkLBId); }
+    });
+    document.body.appendChild(el); return el;
+  }
+  function bkLBPaint(pop) {
+    const el = document.getElementById('bk-lb'); if (!el || el.hidden) return;
+    const i = bkList.findIndex(v => v.id === bkLBId); if (i < 0) { bkLBClose(); return; }
+    const p = bkList[i];
+    el.querySelector('.bk-lb-img').src = p.img || '';
+    const cap = el.querySelector('.bk-lb-cap'); cap.textContent = p.cap || ''; cap.hidden = !p.cap;
+    el.querySelector('.bk-lb-meta').innerHTML = bkAuthor(p) + '<span class="bk-dt">' + esc(bkDate(p.ts)) + '</span>';
+    const lk = el.querySelector('.bk-lb-like'); lk.classList.toggle('on', !!p.lk);
+    lk.querySelector('i').textContent = p.lk ? '❤️' : '🤍'; lk.querySelector('b').textContent = p.lk || 0;
+    if (pop) { lk.classList.remove('pop'); void lk.offsetWidth; lk.classList.add('pop'); }
+    el.querySelector('.prev').hidden = el.querySelector('.next').hidden = bkList.length < 2;
+  }
+  function bkLBOpen(id) { bkLBId = id; const el = bkLBEl(); el.hidden = false; bkLBPaint(false); const x = el.querySelector('[data-lbx]'); if (x) x.focus(); }
+  function bkLBClose() { const el = document.getElementById('bk-lb'); if (el) el.hidden = true; bkLBId = null; }
+  function bkLBStep(d) { const i = bkList.findIndex(v => v.id === bkLBId); if (i < 0 || !bkList.length) return; bkLBId = bkList[(i + d + bkList.length) % bkList.length].id; bkLBPaint(false); }
+  document.addEventListener('keydown', ev => {
+    const el = document.getElementById('bk-lb'); if (!el || el.hidden) return;
+    if (ev.key === 'Escape') { ev.stopPropagation(); ev.preventDefault(); bkLBClose(); }
+    else if (ev.key === 'ArrowLeft') { ev.preventDefault(); bkLBStep(-1); }
+    else if (ev.key === 'ArrowRight') { ev.preventDefault(); bkLBStep(1); }
+  }, true);
+  // Mi piace: stessa logica per la griglia e per la visione ingrandita (si può premere all'infinito)
+  async function bkLikeDo(id) {
+    const pp = bkList.find(v => v.id === id); if (!pp) return;
+    pp.lk = (pp.lk || 0) + 1;
+    if (modal && modal.bkPaint) modal.bkPaint();
+    const sh = modal && modal.sheet ? modal.sheet : document;
+    const hb = sh.querySelector('[data-bklike="' + id + '"]'); if (hb) { hb.classList.remove('pop'); void hb.offsetWidth; hb.classList.add('pop'); }
+    bkLBPaint(true);
+    try { await db.doc('bacheca/' + id).update({lk: pp.lk}); } catch (_) {}
+  }
   function bkFeedHTML() {
     if (!bkList.length) return '<p class="ns-empty">' + esc(bkt('empty')) + '</p>';
     return '<div class="bk-grid">' + bkList.map((p, i) => {
       const ed = bk.admin && bk.edit === p.id;
-      let h = '<article class="bk-card" style="--r:' + ((i % 3) - 1) * 1.3 + 'deg"><span class="bk-tape" aria-hidden="true"></span><img class="bk-img" src="' + esc(p.img || '') + '" alt="" loading="lazy">';
-      h += ed ? '<textarea class="bk-edit" data-bkedit="' + esc(p.id) + '" maxlength="140" aria-label="' + esc(bkt('cap')) + '">' + esc(p.cap || '') + '</textarea>' : (p.cap ? '<p class="bk-cap">' + esc(p.cap) + '</p>' : '');
+      let h = '<article class="bk-card" style="--r:' + ((i % 3) - 1) * 1.3 + 'deg"><span class="bk-tape" aria-hidden="true"></span><img class="bk-img" src="' + esc(p.img || '') + '" alt="" loading="lazy" data-bkzoom="' + esc(p.id) + '">';
+      h += ed ? '<textarea class="bk-edit" data-bkedit="' + esc(p.id) + '" maxlength="140" aria-label="' + esc(bkt('cap')) + '">' + esc(p.cap || '') + '</textarea>' : (p.cap ? '<p class="bk-cap" data-bkzoom="' + esc(p.id) + '">' + esc(p.cap) + '</p>' : '');
       h += '<div class="bk-meta">' + bkAuthor(p) + '<span class="bk-dt">' + esc(bkDate(p.ts)) + '</span></div>';
       h += '<button type="button" class="cg-like' + (p.lk ? ' on' : '') + '" data-bklike="' + esc(p.id) + '" aria-label="' + esc(bkt('like')) + '"><i>' + (p.lk ? '❤️' : '🤍') + '</i> <b>' + (p.lk || 0) + '</b></button>';
       if (bk.admin) h += '<div class="ns-acts">' + (ed ? '<button class="btn primary" type="button" data-bksave="' + esc(p.id) + '">' + esc(bkt('save')) + '</button><button class="btn ghost" type="button" data-bkcancel>' + esc(bkt('cancel')) + '</button>' : '<button class="btn ghost" type="button" data-bkedt="' + esc(p.id) + '">' + esc(bkt('edit')) + '</button>') +
@@ -4469,8 +4536,10 @@ function buildSecPdf(JsPDF, d, T) {
   }
   function openBacheca(admin) {
     bk.admin = !!admin; bk.step = 'feed'; bk.img = ''; bk.who = ''; bk.cap = ''; bk.sure = null; bk.edit = null; bk.camFail = false;
-    const sheet = openModal(bkHTML(), {doc: true, onClose: bkStop});
+    const sheet = openModal(bkHTML(), {doc: true, onClose: () => { bkStop(); bkLBClose(); }});
     sheet.classList.add('cg');
+    modal.sheet = sheet;
+    sheet.addEventListener('click', ev => { const z = ev.target.closest('[data-bkzoom]'); if (z && !ev.target.closest('button,textarea')) bkLBOpen(z.dataset.bkzoom); });
     const draw = () => { sheet.innerHTML = bkHTML(); if (bk.step === 'cam') bkAttachCam(sheet); };
     bk.draw = draw;
     modal.rerender = () => { setTimeout(() => { if (bk.step === 'cam') bkAttachCam(sheet); }, 0); return bkHTML(); };
@@ -4505,7 +4574,7 @@ function buildSecPdf(JsPDF, d, T) {
         if (b.hasAttribute('data-bksnap')) { bk.step = 'cam'; bk.camFail = !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.top === window.self); draw(); if (bk.camFail) bkPopup(sheet, draw); return; }
         if (b.dataset.bkpick) { bk.who = b.dataset.bkpick; draw(); const c = $('#bk-cap', sheet); if (c) c.focus(); err(''); return; }
         if (b.hasAttribute('data-bkchg')) { bk.who = ''; draw(); const q = $('#bk-q', sheet); if (q) q.focus(); return; }
-        if (b.dataset.bklike) { const id = b.dataset.bklike, pp = bkList.find(v => v.id === id); if (!pp) return; pp.lk = (pp.lk || 0) + 1; modal.bkPaint(); const hb = $('[data-bklike="' + id + '"]', sheet); if (hb) { hb.classList.remove('pop'); void hb.offsetWidth; hb.classList.add('pop'); } await db.doc('bacheca/' + id).update({lk: pp.lk}); return; }
+        if (b.dataset.bklike) { await bkLikeDo(b.dataset.bklike); return; }
         if (b.hasAttribute('data-bkdiag')) { const o = $('#bk-dgout', sheet); o.hidden = false; o.textContent = bkt('diagRun'); o.textContent = await bkDiag(); const cb = $('[data-bkdgcopy]', sheet); if (cb) cb.hidden = false; return; }
         if (b.hasAttribute('data-bkdgcopy')) { const o = $('#bk-dgout', sheet); try { await navigator.clipboard.writeText(o.textContent); toast(bkt('copied')); } catch (_) { const r = document.createRange(); r.selectNodeContents(o); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); } return; }
         if (b.hasAttribute('data-bkpop')) { bkPopup(sheet, draw); return; }
